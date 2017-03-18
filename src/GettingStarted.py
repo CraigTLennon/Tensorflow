@@ -91,20 +91,23 @@ import numpy as np
 
 #Next we come to the tf.contrib.learn library, which is supposed to simplify things.
 
-
+import numpy as np
 #here we declare our features, including the type.  
 features = [tf.contrib.layers.real_valued_column("x", dimension=1)]
-
-#the estimator is the front end to do fitting and inference (logistic reg, linear reg)  This one is linear
+  
+# #the estimator is the front end to do fitting and inference (logistic reg, linear reg)  This one is linear
 estimator = tf.contrib.learn.LinearRegressor(feature_columns=features)
-
-#given some np arrays, we need to set up teh data sets using a helper function, which also needs how many batches (epochs) 
-#we want and how big each batch should be
-x=np.array([1.,2.,3.,4.])
+# 
+# #given some np arrays, we need to set up teh data sets using a helper function, which also needs how many batches (epochs) 
+# #we want and how big each batch should be
+x=np.array([-1.,-2.,-3.,-4.])
 y=np.array([0.,-1.,-2.,-3.])
 input_fn= tf.contrib.learn.io.numpy_input_fn({"x":x},y,batch_size=4, num_epochs=1000)
-
-#now we designate how many training steps we will take, I need to distinguish between epochs and training steps 
+  
+# #now we designate how many training steps we will take, I need to distinguish between epochs and training steps 
 estimator.fit(input_fn=input_fn,steps=1000)
-#and the evaluation is below
-estimator.evaluate(input_fn=input_fn)
+# #and the evaluation is below
+print(estimator.evaluate(input_fn=input_fn))
+
+
+
